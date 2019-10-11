@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <style>
+            *{
+                font-size:5vh;
+            }
+            html,body{
+                width:100%;
+                padding:0;
+                border:0;
+                margin:0;
+            }
+            box{
+                width:100px;
+                display: block;
+                box-sizing: border-box;
+                min-height:1em;
+                box-shadow:0 0 0.625em #777777;
+                margin:0.625em;
+                text-align:center;
+                float:left;
+            }
+            next{
+                display:box;
+                width:100vw;
+                height:1px;
+                font-size:1px;
+                float:left;
+            }
+        </style>
+    </head>
+    <body>
+        <box id="box">hello</box>
+        <box>hello</box>
+        <next></next>
+        <box id="box">hello</box>
+        <box>hello</box>
+        <next></next>
+        <box id="box">hello</box>
+        <box>hello</box>
+        <script>
+            window.onload = function(){
+                refresh();
+                //document.getElementById("box").style.width = 200 + "px";
+            }
+            function refresh(parent){
+                if(parent == undefined){
+                    parent = document.getElementsByTagName("body")[0];
+                }
+
+                var childList = [];
+                for(var i = 0;i<parent.childNodes.length;i++){
+                    childList.push(parent.childNodes[i]);
+                }
+                //console.log(childList);
+
+                var hasBoxTag = false;
+                var i = 0;
+                while(i<childList.length){
+                    if(childList[i].tagName == "BOX"){
+                        hasBoxTag = true;
+                        break;
+                    }
+                    else{
+                        i += 1;
+                    }
+                }
+
+                if(!hasBoxTag){
+                    return;
+                }
+
+                var boxList = [];
+                var tmpArr = [];
+                var nowBoxListIndex = 0;
+                for(var i = 0;i<childList.length;i++){
+                    if(childList[i].tagName == "BOX"){
+                        tmpArr.push(childList[i]);
+                    }
+                    else if(childList[i].tagName == "NEXT"){
+                        boxList.push(tmpArr);
+                        tmpArr = [];
+                        nowBoxListIndex += 1;
+                    }
+                }
+                boxList.push(tmpArr);
+
+                console.log(boxList);
+            }
+        </script>
+    </body>
+</html>
