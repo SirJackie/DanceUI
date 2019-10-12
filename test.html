@@ -87,6 +87,21 @@
                 }
                 boxList.push(tmpArr);
 
+                for(var j = 0;j<boxList.length;j++){
+                    var parentWidth = boxList[j][0].parentNode.scrollWidth;
+                    var totalFlex = 0;
+                    for(var i = 0;i<boxList[j].length;i++){
+                        if(boxList[j][i].flex == undefined){
+                            boxList[j][i].flex = 1;
+                        }
+                        totalFlex += boxList[j][i].flex;
+                    }
+                    var everyFlex = parentWidth / totalFlex;
+                    for(var i = 0;i<boxList[j].length;i++){
+                        boxList[j][i].style.width = (boxList[j][i].flex * everyFlex) + "px";
+                    }
+                }
+
                 console.log(boxList);
             }
         </script>
