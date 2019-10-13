@@ -6,16 +6,12 @@
             *{
                 font-size:5vh;
             }
-            html,body{
-                width:100%;
-                padding:0;
-                border:0;
+            body{
                 margin:0;
             }
             box{
                 width:100px;
                 display: block;
-                box-sizing: border-box;
                 min-height:1em;
                 box-shadow:0 0 0.625em #777777;
                 margin:0.625em;
@@ -34,16 +30,29 @@
     <body>
         <box id="box">hello</box>
         <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
         <next></next>
+
+        <box id="box">hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <next></next>
+
         <box id="box">hello</box>
         <box>hello</box>
         <next></next>
-        <box id="box">hello</box>
-        <box>hello</box>
+
+        <box>
+            <box>a</box>
+            <box>b</box>
+            <next></next>
+            <box>c</box>
+        </box>
         <script>
             window.onload = function(){
                 refresh();
-                //document.getElementById("box").style.width = 200 + "px";
+                //alert(document.getElementsByTagName("body")[0].scrollWidth);
             }
             function refresh(parent){
                 if(parent == undefined){
@@ -88,7 +97,8 @@
                 boxList.push(tmpArr);
 
                 for(var j = 0;j<boxList.length;j++){
-                    var parentWidth = boxList[j][0].parentNode.scrollWidth;
+                    var parentWidth = boxList[j][0].parentNode.clientWidth;
+                    //alert(parentWidth);
                     var totalFlex = 0;
                     for(var i = 0;i<boxList[j].length;i++){
                         if(boxList[j][i].flex == undefined){
@@ -98,7 +108,13 @@
                     }
                     var everyFlex = parentWidth / totalFlex;
                     for(var i = 0;i<boxList[j].length;i++){
-                        boxList[j][i].style.width = (boxList[j][i].flex * everyFlex) + "px";
+                        var boxElement = boxList[j][i];
+                        var boxStyle = style = window.getComputedStyle(boxElement, null);
+                        var marginLeft = boxStyle.marginLeft;
+                        var marginRight = boxStyle.marginRight;
+                        marginLeft = parseFloat(marginLeft.substr(0,marginLeft.length-2));
+                        marginRight = parseFloat(marginRight.substr(0,marginRight.length-2));
+                        boxList[j][i].style.width = (boxList[j][i].flex * everyFlex - marginLeft - marginRight) + "px";
                     }
                 }
 
