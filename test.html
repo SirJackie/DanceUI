@@ -21,18 +21,18 @@
         </style>
     </head>
     <body onResize="">
-        <box id="box">hello</box>
+        <box id="box" flex="2">hello</box>
         <box>hello</box>
         <box>hello</box>
         <box>hello</box>
         <next></next>
 
-        <box id="box">hello</box>
+        <box>hello</box>
         <box>hello</box>
         <box>hello</box>
         <next></next>
 
-        <box id="box">hello</box>
+        <box>hello</box>
         <box>hello</box>
         <next></next>
 
@@ -96,11 +96,13 @@
                     //alert(parentWidth);
                     var totalFlex = 0;
                     for(var i = 0;i<boxList[j].length;i++){
-                        if(boxList[j][i].flex == undefined){
+                        boxList[j][i].flex = boxList[j][i].getAttribute("flex");
+                        if(!boxList[j][i].flex){
                             boxList[j][i].flex = 1;
                         }
-                        totalFlex += boxList[j][i].flex;
+                        totalFlex += parseInt(boxList[j][i].flex);
                     }
+                    //alert(totalFlex);
                     var everyFlex = parentWidth / totalFlex;
                     for(var i = 0;i<boxList[j].length;i++){
                         var boxElement = boxList[j][i];
