@@ -21,7 +21,12 @@
         </style>
     </head>
     <body onResize="">
-        <box id="box" flex="2">hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <next></next>
+
         <box>hello</box>
         <box>hello</box>
         <box>hello</box>
@@ -29,10 +34,8 @@
 
         <box>hello</box>
         <box>hello</box>
-        <box>hello</box>
         <next></next>
 
-        <box>hello</box>
         <box>hello</box>
         <next></next>
 
@@ -42,10 +45,38 @@
             <next></next>
             <box>c</box>
         </box>
+        <next></next>
+
+        <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <next></next>
+
+        <box>hello</box>
+        <box>hello</box>
+        <box>hello</box>
+        <next></next>
+
+        <box>hello</box>
+        <box>hello</box>
+        <next></next>
+
+        <box>hello</box>
+        <next></next>
+
+        <box>
+            <box>a</box>
+            <box>b</box>
+            <next></next>
+            <box>c</box>
+        </box>
+
         <script>
             var windowWidth = window.innerWidth;
             var windowHeight = window.innerHeight;
             window.onload = function(){
+                refresh();
                 refresh();
                 setInterval(checkWindowSize,100);
             }
@@ -111,7 +142,7 @@
                         var marginRight = boxStyle.marginRight;
                         marginLeft = parseFloat(marginLeft.substr(0,marginLeft.length-2));
                         marginRight = parseFloat(marginRight.substr(0,marginRight.length-2));
-                        boxList[j][i].style.width = (boxList[j][i].flex * everyFlex - marginLeft - marginRight) + "px";
+                        boxList[j][i].style.width = Math.floor(boxList[j][i].flex * everyFlex - marginLeft - marginRight) + "px";
                     }
                 }
 
