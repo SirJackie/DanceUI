@@ -20,7 +20,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onResize="">
         <box id="box">hello</box>
         <box>hello</box>
         <box>hello</box>
@@ -43,9 +43,11 @@
             <box>c</box>
         </box>
         <script>
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
             window.onload = function(){
                 refresh();
-                //alert(document.getElementsByTagName("body")[0].scrollWidth);
+                setInterval(checkWindowSize,100);
             }
             function refresh(parent){
                 if(parent == undefined){
@@ -117,7 +119,14 @@
                     }
                 }
 
-                console.log(boxList);
+                //console.log(boxList);
+            }
+            function checkWindowSize(){
+                if(windowWidth != window.innerWidth || windowHeight != window.innerHeight){
+                    windowWidth = window.innerWidth;
+                    windowHeight = window.innerHeight;
+                    refresh();
+                }
             }
         </script>
     </body>
