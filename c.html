@@ -108,69 +108,91 @@
                     });
                 },
 
-                GetDanceWidthHeight : function(dance){
-                    var widthHeightObj = {
+                GetDanceArea : function(dance){
+                    /* 定义areaObj */
+                    var areaObj = {
                         width  : null,
-                        height : null,
-                        wUnit  : null,
-                        hUnit  : null
+                        height : null
                     }
 
-                    /* 如果<dance>有宽高,就获取,否则宽都等于1f,高都等于1h */
+                    /* 获取<dance>标签的宽高属性值 */
                     var danceWidthStr  = dance.getAttribute("width");
                     var danceHeightStr = dance.getAttribute("height");
+
+                    /* 如果<dance>有宽,就获取,否则宽等于1f */
                     if(danceWidthStr == null){
-                        widthHeightObj.width = 1;
-                        widthHeightObj.wUnit = "f";
+                        areaObj.width = {
+                            num  : 1,
+                            unit : "f"
+                        };
                     }
                     else{
-
+                        areaObj.width = DanceUI.DecodeStringUnit(danceWidthStr);
                     }
+
+                    /* 如果<dance>有高,就获取,否则高等于1h */
                     if(danceHeightStr == null){
-                        widthHeightObj.height = 1;
-                        widthHeightObj.hUnit  = "h";
+                        areaObj.height = {
+                            num  : 1,
+                            unit : "h"
+                        };
+                    }
+                    else{
+                        areaObj.height = DanceUI.DecodeStringUnit(danceHeightStr);
                     }
 
-                    /* 返回宽高 */
-                    
-                    var resultStr = str.match(/\d+f/)[0];
-                    
+                    /* 返回areaObj */
+                    return areaObj;
                 },
 
                 calcDanceUseH : function(danceTag){
                     ;
-                }
-            }
-            
+                },
 
-            
+                refresh : function(parent){
+                    /* 如果父节点是<line>,就开始布局自适应的<dance> */
+                    if(parent.tagName == "LINE"){
+                        for(var i = 0; i < parent.childNodes.length; i++){
+                            // /* 获取或赋予并获取每个<dance>的宽高 */
+                            
 
-            
-
-            function refresh(parent){
-                /* 如果父节点是<line>,就开始布局自适应的<dance> */
-                if(parent.tagName == "LINE"){
-                    for(var i = 0; i < parent.childNodes.length; i++){
-                        // /* 获取或赋予并获取每个<dance>的宽高 */
-                        
-
-                        // /* 处理宽度 */
-                        // var danceWidthF = f2num(danceWidthStr);
-                        // console.log(danceWidthF);
+                            // /* 处理宽度 */
+                            // var danceWidthF = f2num(danceWidthStr);
+                            // console.log(danceWidthF);
+                        }
                     }
-                }
-                /* 如果父节点不是<line>,或者处理完<line>了,就继续遍历子节点 */
-                for(var i = 0; i < parent.childNodes.length; i++){
-                    refresh(parent.childNodes[i]);
+                    /* 如果父节点不是<line>,或者处理完<line>了,就继续遍历子节点 */
+                    for(var i = 0; i < parent.childNodes.length; i++){
+                        DanceUI.refresh(parent.childNodes[i]);
+                    }
+                },
+
+                UserWindowOnload : function(){
+                    ;
+                },
+
+                UserWindowOnresize : function(){
+                    ;
+                },
+
+                WindowOnload : function(){
+                    DanceUI.GetStandardHeight();
+                    DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.UserWindowOnload();
+                },
+
+                WindowOnresize : function(){
+                    DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.UserWindowOnresize();
                 }
             }
+            
 
             window.onload = function(){
-                DanceUI.GetStandardHeight();
-                refresh(document.getElementsByTagName("body")[0]);
+                DanceUI.WindowOnload();
             }
             window.onresize = function(){
-                refresh(document.getElementsByTagName("body")[0]);
+                DanceUI.WindowOnresize();
             }
         </script>
     </body>
