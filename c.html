@@ -145,20 +145,16 @@
                     return areaObj;
                 },
 
-                calcDanceUseH : function(danceTag){
-                    ;
-                },
-
                 refresh : function(parent){
                     /* 如果父节点是<line>,就开始布局自适应的<dance> */
                     if(parent.tagName == "LINE"){
                         for(var i = 0; i < parent.childNodes.length; i++){
-                            // /* 获取或赋予并获取每个<dance>的宽高 */
-                            
-
-                            // /* 处理宽度 */
-                            // var danceWidthF = f2num(danceWidthStr);
-                            // console.log(danceWidthF);
+                            /* 如果子节点是文字之类的,不作处理 */
+                            if(parent.childNodes[i].tagName != "DANCE"){
+                                continue;
+                            }
+                            var danceArea = DanceUI.GetDanceArea(parent.childNodes[i]);
+                            console.log(danceArea);
                         }
                     }
                     /* 如果父节点不是<line>,或者处理完<line>了,就继续遍历子节点 */
