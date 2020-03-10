@@ -12,7 +12,7 @@ function refreshDocumentTree(parent){
     var hasBoxTag = false;
     var i = 0;
     while(i < childList.length){
-        if(childList[i].tagName == "BOX"){
+        if(childList[i].tagName == "DANCE"){
             hasBoxTag = true;
             break;
         }

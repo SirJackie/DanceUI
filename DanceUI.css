@@ -1,10 +1,12 @@
 *{
     font-size:5vh;
 }
+
 body{
     margin:0;
 }
-box{
+
+dance{
     width:100px;
     display: block;
     min-height:1em;
