@@ -1,0 +1,16 @@
+*{
+    font-size:5vh;
+}
+body{
+    margin:0;
+}
+box{
+    width:100px;
+    display: block;
+    min-height:1em;
+    box-shadow:0 0 0.625em #777777;
+    margin:0.625em;
+    text-align:center;
+    float:left;
+    overflow: hidden;
+}
