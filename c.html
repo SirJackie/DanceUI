@@ -77,55 +77,63 @@
             </dance>
         </line>
         <script>
-            function f2num(str){
-                var resultStr = str.match(/\d+f/)[0];
-                return Math.floor(resultStr.substr(0,resultStr.length-1));
+            var DanceUI = {
+                standardHeight : null,
+
+                GetStandardHeight : function(){
+                    DanceUI.standardHeight = document.documentElement.clientHeight / 15;
+                },
+
+                f2num : function(str){
+                    var resultStr = str.match(/\d+f/)[0];
+                    return Math.floor(resultStr.substr(0,resultStr.length-1));
+                },
+
+                calcDanceUseH : function(danceTag){
+                    aa;
+                }
             }
+            
+
+            
+
+            
 
             function refresh(parent){
-                /* 如果父节点不是<line>,就直接遍历子节点,不作处理 */
-                if(parent.tagName != "LINE"){
-                    for(var i = 0; i < parent.childNodes.length; i++){
-                        refresh(parent.childNodes[i]);
-                    }
-                    return;
-                }
-
                 /* 如果父节点是<line>,就开始布局自适应的<dance> */
-                for(var i = 0; i < parent.childNodes.length; i++){
-                    console.log(parent.childNodes[i]);
-                    // /* 获取或赋予并获取每个<dance>的宽高 */
-                    // var danceWidthStr  = parent.childNodes[i].getAttribute("width");
-                    // var danceHeightStr = parent.childNodes[i].getAttribute("height");
-                    // if(danceWidthStr == null){
-                    //     parent.childNodes[i].setAttribute("width", "1f");
-                    //     danceWidthStr = "1f";
-                    // }
-                    // if(danceHeightStr == null){
-                    //     parent.childNodes[i].setAttribute("height", "1h");
-                    //     danceHeightStr = "1h";
-                    // }
+                if(parent.tagName == "LINE"){
+                    for(var i = 0; i < parent.childNodes.length; i++){
+                        // console.log(parent.childNodes[i]);
+                        // /* 获取或赋予并获取每个<dance>的宽高 */
+                        // var danceWidthStr  = parent.childNodes[i].getAttribute("width");
+                        // var danceHeightStr = parent.childNodes[i].getAttribute("height");
+                        // if(danceWidthStr == null){
+                        //     parent.childNodes[i].setAttribute("width", "1f");
+                        //     danceWidthStr = "1f";
+                        // }
+                        // if(danceHeightStr == null){
+                        //     parent.childNodes[i].setAttribute("height", "1h");
+                        //     danceHeightStr = "1h";
+                        // }
 
-                    // /* 处理宽度 */
-                    // var danceWidthF = f2num(danceWidthStr);
-                    // console.log(danceWidthF);
+                        // /* 处理宽度 */
+                        // var danceWidthF = f2num(danceWidthStr);
+                        // console.log(danceWidthF);
+                    }
                 }
-
-                /* 处理完这个<line>了,继续遍历子节点 */
+                /* 如果父节点不是<line>,或者处理完<line>了,就继续遍历子节点 */
                 for(var i = 0; i < parent.childNodes.length; i++){
                     refresh(parent.childNodes[i]);
                 }
             }
 
-            refresh(document.getElementsByTagName("body")[0]);
-
-            // var dance = document.getElementsByTagName("dance");
-            // var i = 0;
-            // var danceHeightStr = dance[i].getAttribute("height");
-            // console.log(danceHeightStr);
-
-            // var danceHeightF = f2num(danceHeightStr);
-            // console.log(danceHeightF);
+            window.onload = function(){
+                DanceUI.GetStandardHeight();
+                refresh(document.getElementsByTagName("body")[0]);
+            }
+            window.onresize = function(){
+                refresh(document.getElementsByTagName("body")[0]);
+            }
         </script>
     </body>
 </html>
