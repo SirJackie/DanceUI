@@ -78,10 +78,16 @@
         </line>
         <script>
             var DanceUI = {
-                standardHeight : null,
-
-                GetStandardHeight : function(){
-                    DanceUI.standardHeight = document.documentElement.clientHeight / 15;
+                StandardUnits : {
+                    Height   : null,
+                    Margin   : null,
+                    FontSize : null
+                },
+                
+                CalculateStandardUnits : function(){
+                    DanceUI.StandardUnits.Height   = document.documentElement.clientHeight / 7.5;
+                    DanceUI.StandardUnits.Margin   = DanceUI.StandardUnits.Height / 4;
+                    DanceUI.StandardUnits.FontSize = DanceUI.StandardUnits.Height - 2 * DanceUI.StandardUnits.Margin;
                 },
 
                 DecodeStringUnit : function(str){
@@ -172,7 +178,7 @@
                 },
 
                 WindowOnload : function(){
-                    DanceUI.GetStandardHeight();
+                    DanceUI.CalculateStandardUnits();
                     DanceUI.refresh(document.getElementsByTagName("body")[0]);
                     DanceUI.UserWindowOnload();
                 },
