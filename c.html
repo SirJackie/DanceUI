@@ -83,43 +83,36 @@
             }
 
             function refresh(parent){
-                /* 如果父节点不是<line>,就继续遍历 */
+                /* 如果父节点不是<line>,就直接遍历子节点,不作处理 */
                 if(parent.tagName != "LINE"){
                     for(var i = 0; i < parent.childNodes.length; i++){
                         refresh(parent.childNodes[i]);
                     }
+                    return;
                 }
 
+                /* 如果父节点是<line>,就开始布局自适应的<dance> */
                 for(var i = 0; i < parent.childNodes.length; i++){
-                    if(parent.childNodes[i].tagName == "LINE"){
-                        //Start to find dances
-                        
-                    }
-                    else if(parent.childNodes[i].tagName == "DANCE"){
+                    console.log(parent.childNodes[i]);
+                    // /* 获取或赋予并获取每个<dance>的宽高 */
+                    // var danceWidthStr  = parent.childNodes[i].getAttribute("width");
+                    // var danceHeightStr = parent.childNodes[i].getAttribute("height");
+                    // if(danceWidthStr == null){
+                    //     parent.childNodes[i].setAttribute("width", "1f");
+                    //     danceWidthStr = "1f";
+                    // }
+                    // if(danceHeightStr == null){
+                    //     parent.childNodes[i].setAttribute("height", "1h");
+                    //     danceHeightStr = "1h";
+                    // }
 
-                        /*
-                        ** Process <dance> Tag
-                        */
+                    // /* 处理宽度 */
+                    // var danceWidthF = f2num(danceWidthStr);
+                    // console.log(danceWidthF);
+                }
 
-                        /* Get the Width and Height attribute from <dance> Tag */
-                        var danceWidthStr  = parent.childNodes[i].getAttribute("width");
-                        var danceHeightStr = parent.childNodes[i].getAttribute("height");
-
-                        if(danceWidthStr == null){
-                            parent.childNodes[i].setAttribute("width", "1f");
-                            danceWidthStr = "1f";
-                        }
-                        if(danceHeightStr == null){
-                            parent.childNodes[i].setAttribute("height", "1h");
-                            danceHeightStr = "1h";
-                        }
-                        console.log(danceWidthStr);
-                        console.log(danceHeightStr);
-
-                        /* Process Width */
-                        var danceWidthF = f2num(danceWidthStr);
-                        console.log(danceWidthF);
-                    }
+                /* 处理完这个<line>了,继续遍历子节点 */
+                for(var i = 0; i < parent.childNodes.length; i++){
                     refresh(parent.childNodes[i]);
                 }
             }
