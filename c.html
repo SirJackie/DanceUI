@@ -83,13 +83,17 @@
             }
 
             function refresh(parent){
+                /* 如果父节点不是<line>,就继续遍历 */
+                if(parent.tagName != "LINE"){
+                    for(var i = 0; i < parent.childNodes.length; i++){
+                        refresh(parent.childNodes[i]);
+                    }
+                }
+
                 for(var i = 0; i < parent.childNodes.length; i++){
-                    // console.log("parent:");
-                    // console.log(parent);
-                    // console.log("parent.childNodes[" + i +"]");
-                    // console.log(parent.childNodes[i]);
                     if(parent.childNodes[i].tagName == "LINE"){
-                        //<line>
+                        //Start to find dances
+                        
                     }
                     else if(parent.childNodes[i].tagName == "DANCE"){
 
