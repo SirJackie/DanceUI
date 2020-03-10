@@ -84,13 +84,61 @@
                     DanceUI.standardHeight = document.documentElement.clientHeight / 15;
                 },
 
-                f2num : function(str){
+                DecodeStringUnit : function(str){
+                    var resultStr = str.match(/\d+f/);
+                    if(resultStr == null){
+                        resultStr = str.match(/\d+h/);
+                        if(resultStr == null){
+                            //出错
+                            console.log("DanceUI Error:Cannot get string's unit");
+                            console.log("Error String:");
+                            console.log(str);
+                            return null;
+                        }
+                        //单位是h
+                        return ({
+                            num : Math.floor(resultStr[0].substr(0,resultStr[0].length-1)),
+                            unit : "h"
+                        });
+                    }
+                    //单位是f
+                    return ({
+                        num : Math.floor(resultStr[0].substr(0,resultStr[0].length-1)),
+                        unit : "f"
+                    });
+                },
+
+                GetDanceWidthHeight : function(dance){
+                    var widthHeightObj = {
+                        width  : null,
+                        height : null,
+                        wUnit  : null,
+                        hUnit  : null
+                    }
+
+                    /* 如果<dance>有宽高,就获取,否则宽都等于1f,高都等于1h */
+                    var danceWidthStr  = dance.getAttribute("width");
+                    var danceHeightStr = dance.getAttribute("height");
+                    if(danceWidthStr == null){
+                        widthHeightObj.width = 1;
+                        widthHeightObj.wUnit = "f";
+                    }
+                    else{
+
+                    }
+                    if(danceHeightStr == null){
+                        widthHeightObj.height = 1;
+                        widthHeightObj.hUnit  = "h";
+                    }
+
+                    /* 返回宽高 */
+                    
                     var resultStr = str.match(/\d+f/)[0];
-                    return Math.floor(resultStr.substr(0,resultStr.length-1));
+                    
                 },
 
                 calcDanceUseH : function(danceTag){
-                    aa;
+                    ;
                 }
             }
             
@@ -103,18 +151,8 @@
                 /* 如果父节点是<line>,就开始布局自适应的<dance> */
                 if(parent.tagName == "LINE"){
                     for(var i = 0; i < parent.childNodes.length; i++){
-                        // console.log(parent.childNodes[i]);
                         // /* 获取或赋予并获取每个<dance>的宽高 */
-                        // var danceWidthStr  = parent.childNodes[i].getAttribute("width");
-                        // var danceHeightStr = parent.childNodes[i].getAttribute("height");
-                        // if(danceWidthStr == null){
-                        //     parent.childNodes[i].setAttribute("width", "1f");
-                        //     danceWidthStr = "1f";
-                        // }
-                        // if(danceHeightStr == null){
-                        //     parent.childNodes[i].setAttribute("height", "1h");
-                        //     danceHeightStr = "1h";
-                        // }
+                        
 
                         // /* 处理宽度 */
                         // var danceWidthF = f2num(danceWidthStr);
