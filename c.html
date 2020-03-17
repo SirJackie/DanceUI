@@ -80,13 +80,11 @@
             var DanceUI = {
                 StandardUnits : {
                     Height   : null,
-                    Margin   : null,
                     FontSize : null
                 },
                 
                 CalculateStandardUnits : function(){
-                    DanceUI.StandardUnits.Height   = document.documentElement.clientHeight / 7.5;
-                    DanceUI.StandardUnits.Margin   = DanceUI.StandardUnits.Height / 4;
+                    DanceUI.StandardUnits.Height   = document.documentElement.clientHeight / 10;
                     DanceUI.StandardUnits.FontSize = DanceUI.StandardUnits.Height - 2 * DanceUI.StandardUnits.Margin;
                 },
 

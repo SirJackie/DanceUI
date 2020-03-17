@@ -1,15 +1,18 @@
-*{
-    font-size:5vh;
+html,body{
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
-body{
-    margin:0;
+line{
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 dance{
-    width:100px;
     display: block;
-    min-height:1em;
     box-shadow:0 0 0.625em #777777;
     margin:0.625em;
     text-align:center;
