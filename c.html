@@ -6,11 +6,11 @@
     </head>
     <body>
         <line>
-            <dance width="1h" height="1h">h</dance>
+            <dance width="1f" height="1f">h</dance>
+            <!-- <dance width="1f" height="1h">f</dance>
             <dance width="1f" height="1h">f</dance>
             <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1h" height="1h">h</dance>
+            <dance width="1h" height="1h">h</dance> -->
         </line>
         <script>
             var DanceUI = {
@@ -31,8 +31,8 @@
                     style.type = "text/css";
                     try{
                         style.appendChild(document.createTextNode("body{font-size:" + DanceUI.StandardUnits.FontSize + "px;}"));
-                        // style.appendChild(document.createTextNode("dance{margin:" + DanceUI.StandardUnits.Margin + "px;}"));
-                        // style.appendChild(document.createTextNode("dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;"));
+                        style.appendChild(document.createTextNode("dance{margin:" + DanceUI.StandardUnits.Margin + "px;}"));
+                        style.appendChild(document.createTextNode("dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;"));
                     }catch(ex){
                         //针对IE
                         style.styleSheet.cssText = "body{font-size:" + DanceUI.StandardUnits.FontSize + "px;}dance{margin:" + DanceUI.StandardUnits.Margin + "px;}dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;";
@@ -42,9 +42,9 @@
                 },
 
                 DecodeStringUnit : function(str){
-                    var resultStr = str.match(/\d+f/);
+                    var resultStr = str.match(/[0123456789.]+f/);
                     if(resultStr == null){
-                        resultStr = str.match(/\d+h/);
+                        resultStr = str.match(/[0123456789.]+h/);
                         if(resultStr == null){
                             //出错
                             console.log("DanceUI Error:Cannot get string's unit");
@@ -66,7 +66,7 @@
                 },
 
                 DecodeComputedStyle : function(str){
-                    var resultStr = str.match(/\d+px/);
+                    var resultStr = str.match(/[0123456789.]+px/);
                     return Math.floor(resultStr[0].substr(0,resultStr[0].length-2));
                 },
 
@@ -142,7 +142,7 @@
                             wannawidth = (areaResult.width.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginLeft) + DanceUI.DecodeComputedStyle(computedStyle.marginRight) + DanceUI.DecodeComputedStyle(computedStyle.paddingLeft) + DanceUI.DecodeComputedStyle(computedStyle.paddingRight) + DanceUI.DecodeComputedStyle(computedStyle.borderLeft) + DanceUI.DecodeComputedStyle(computedStyle.borderRight));
                         }
                         if(areaResult.height.unit == "h"){
-                            wannaheight = (areaResult.height.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
+                            wannaheight = (areaResult.height.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom))/2;
                         }
                         else if(areaResult.height.unit == "f"){
                             wannaheight = (areaResult.height.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
@@ -151,7 +151,7 @@
                         parent.style.height = wannaheight + "px";
                         // console.log(areaResult.width.num * everyFlexPixel);
                         // console.log(wannawidth);
-                        // console.log(wannaheight);
+                        console.log((DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom)));
                         // console.log(computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
                         
                         for(var i = 0; i < parent.childNodes.length; i++){
