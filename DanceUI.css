@@ -17,4 +17,5 @@ dance{
     text-align:center;
     float:left;
     overflow: hidden;
+    background:linear-gradient(160deg, rgb(0,144,255), rgb(0,255,213));
 }
