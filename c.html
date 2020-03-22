@@ -6,7 +6,7 @@
     </head>
     <body>
         <line>
-            <dance width="4f">4x</dance>
+            <dance width="4f" height="4f">4x</dance>
             <dance width="3f">3x</dance>
             <dance width="2f">2x</dance>
             <dance width="1f">1x</dance>
@@ -30,8 +30,8 @@
                     style.type = "text/css";
                     try{
                         style.appendChild(document.createTextNode("body{font-size:" + DanceUI.StandardUnits.FontSize + "px;}"));
-                        style.appendChild(document.createTextNode("dance{margin:" + DanceUI.StandardUnits.Margin + "px;}"));
-                        style.appendChild(document.createTextNode("dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;"));
+                        // style.appendChild(document.createTextNode("dance{margin:" + DanceUI.StandardUnits.Margin + "px;}"));
+                        // style.appendChild(document.createTextNode("dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;"));
                     }catch(ex){
                         //针对IE
                         style.styleSheet.cssText = "body{font-size:" + DanceUI.StandardUnits.FontSize + "px;}dance{margin:" + DanceUI.StandardUnits.Margin + "px;}dance{box-shadow:0 0 " + DanceUI.StandardUnits.Margin + "px #777777;";
@@ -148,9 +148,10 @@
                         }
                         parent.style.width = wannawidth + "px";
                         parent.style.height = wannaheight + "px";
-                        console.log(wannawidth);
-                        console.log(wannaheight);
-                        console.log(computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
+                        console.log(areaResult.width.num * everyFlexPixel);
+                        // console.log(wannawidth);
+                        // console.log(wannaheight);
+                        // console.log(computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
                         
                         for(var i = 0; i < parent.childNodes.length; i++){
                             DanceUI.refresh(parent.childNodes[i], null);
