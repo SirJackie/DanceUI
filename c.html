@@ -6,8 +6,12 @@
     </head>
     <body>
         <line>
-            <dance width="5h" height="5h">h</dance>
-            <dance width="1f" height="5h">f</dance>
+            <!-- <dance width="5h" height="5h">h</dance> -->
+            <dance width="1f" height="1h">f</dance>
+            <dance width="1f" height="1h">f</dance>
+            <dance width="1f" height="1h">f</dance>
+            <dance width="1f" height="1h">f</dance>
+            <dance width="1f" height="1h">f</dance>
         </line>
         <script>
             var DanceUI = {
@@ -19,8 +23,8 @@
                 
                 CalculateStandardUnits : function(){
                     DanceUI.StandardUnits.Height   = document.documentElement.clientHeight / 10;
-                    DanceUI.StandardUnits.Margin   = DanceUI.StandardUnits.Height / 3;
-                    DanceUI.StandardUnits.FontSize = DanceUI.StandardUnits.Margin * 2;
+                    DanceUI.StandardUnits.Margin   = DanceUI.StandardUnits.Height * 0.2;
+                    DanceUI.StandardUnits.FontSize = DanceUI.StandardUnits.Height * 0.6;
                 },
 
                 SetStandardUnits : function(){
@@ -123,7 +127,7 @@
                         }
 
                         for(var i = 0; i < parent.childNodes.length; i++){
-                            DanceUI.refresh(parent.childNodes[i], (totalWidth - totalHPixel) / totalF);
+                            DanceUI.refresh(parent.childNodes[i], ((totalWidth - totalHPixel) / totalF - 1));//-1 to prevent overflow
                         }
                         return;
                     }
