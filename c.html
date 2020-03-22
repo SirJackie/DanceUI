@@ -101,21 +101,28 @@
                     return areaObj;
                 },
 
-                refresh : function(parent){
-                    /* 如果父节点是<line>,就开始布局自适应的<dance> */
+                refresh : function(parent, everyFlexPixel){
                     if(parent.tagName == "LINE"){
+                        var totalWidth = parent.clientWidth;
+                        console.log(totalWidth);
+
+                        var totalHPixel = 0;;
+                        var totalF = 0;
                         for(var i = 0; i < parent.childNodes.length; i++){
-                            /* 如果子节点是文字之类的,不作处理 */
-                            if(parent.childNodes[i].tagName != "DANCE"){
-                                continue;
+                            if(parent.childNodes[i].tagName == "DANCE"){
+                                var areaResult = DanceUI.GetDanceArea(parent.childNodes[i]);
+                                if(areaResult.width.unit == "h"){
+                                    totalHPixel += areaResult.width.num * DanceUI.StandardUnits.Height;
+                                }
+                                else if(areaResult.width.unit == "f"){
+                                    totalF += areaResult.width.num;
+                                }
                             }
-                            var danceArea = DanceUI.GetDanceArea(parent.childNodes[i]);
-                            console.log(danceArea);
                         }
-                    }
-                    /* 如果父节点不是<line>,或者处理完<line>了,就继续遍历子节点 */
-                    for(var i = 0; i < parent.childNodes.length; i++){
-                        DanceUI.refresh(parent.childNodes[i]);
+
+                        for(var i = 0; i < parent.childNodes.length; i++){
+                            DanceUI.refresh(parent.childNodes[i], (totalWidth - totalHPixel) / totalF);
+                        }
                     }
                 },
 
@@ -130,12 +137,14 @@
                 WindowOnload : function(){
                     DanceUI.CalculateStandardUnits();
                     DanceUI.SetStandardUnits();
-                    DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.refresh(document.getElementsByTagName("line")[0], null);
+                    // DanceUI.refresh(document.getElementsByTagName("body")[0]);
                     DanceUI.UserWindowOnload();
                 },
 
                 WindowOnresize : function(){
-                    DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.refresh(document.getElementsByTagName("line")[0], null);
+                    // DanceUI.refresh(document.getElementsByTagName("body")[0]);
                     DanceUI.UserWindowOnresize();
                 }
             }
