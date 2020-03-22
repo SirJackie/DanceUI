@@ -64,6 +64,11 @@
                     });
                 },
 
+                DecodeComputedStyle : function(str){
+                    var resultStr = str.match(/\d+px/);
+                    return Math.floor(resultStr[0].substr(0,resultStr[0].length-2));
+                },
+
                 GetDanceArea : function(dance){
                     /* 定义areaObj */
                     var areaObj = {
@@ -104,7 +109,6 @@
                 refresh : function(parent, everyFlexPixel){
                     if(parent.tagName == "LINE"){
                         var totalWidth = parent.clientWidth;
-                        console.log(totalWidth);
 
                         var totalHPixel = 0;;
                         var totalF = 0;
@@ -123,26 +127,38 @@
                         for(var i = 0; i < parent.childNodes.length; i++){
                             DanceUI.refresh(parent.childNodes[i], (totalWidth - totalHPixel) / totalF);
                         }
+                        return;
                     }
                     else if(parent.tagName == "DANCE"){
                         var computedStyle = getComputedStyle(parent, null);
                         var areaResult = DanceUI.GetDanceArea(parent);
+                        var wannawidth;
+                        var wannaheight;
                         if(areaResult.width.unit == "h"){
-                            parent.style.width = (areaResult.width.num * DanceUI.StandardUnits.Height) - (computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
+                            wannawidth = (areaResult.width.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginLeft) + DanceUI.DecodeComputedStyle(computedStyle.marginRight) + DanceUI.DecodeComputedStyle(computedStyle.paddingLeft) + DanceUI.DecodeComputedStyle(computedStyle.paddingRight) + DanceUI.DecodeComputedStyle(computedStyle.borderLeft) + DanceUI.DecodeComputedStyle(computedStyle.borderRight));
                         }
                         else if(areaResult.width.unit == "f"){
-                            parent.style.width = (areaResult.width.num * everyFlexPixel) - (computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
+                            wannawidth = (areaResult.width.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginLeft) + DanceUI.DecodeComputedStyle(computedStyle.marginRight) + DanceUI.DecodeComputedStyle(computedStyle.paddingLeft) + DanceUI.DecodeComputedStyle(computedStyle.paddingRight) + DanceUI.DecodeComputedStyle(computedStyle.borderLeft) + DanceUI.DecodeComputedStyle(computedStyle.borderRight));
                         }
                         if(areaResult.height.unit == "h"){
-                            parent.style.height = (areaResult.height.num * DanceUI.StandardUnits.Height) - (computedStyle.marginTop + computedStyle.marginBottom + computedStyle.paddingTop + computedStyle.paddingBottom + computedStyle.borderTop + computedStyle.borderBottom);
+                            wannaheight = (areaResult.height.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
                         }
                         else if(areaResult.height.unit == "f"){
-                            parent.style.height = (areaResult.height.num * everyFlexPixel) - (computedStyle.marginTop + computedStyle.marginBottom + computedStyle.paddingTop + computedStyle.paddingBottom + computedStyle.borderTop + computedStyle.borderBottom);
+                            wannaheight = (areaResult.height.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
                         }
+                        parent.style.width = wannawidth + "px";
+                        parent.style.height = wannaheight + "px";
+                        console.log(wannawidth);
+                        console.log(wannaheight);
+                        console.log(computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
                         
                         for(var i = 0; i < parent.childNodes.length; i++){
                             DanceUI.refresh(parent.childNodes[i], null);
                         }
+                        return;
+                    }
+                    for(var i = 0; i < parent.childNodes.length; i++){
+                        DanceUI.refresh(parent.childNodes[i], null);
                     }
                 },
 
