@@ -124,6 +124,26 @@
                             DanceUI.refresh(parent.childNodes[i], (totalWidth - totalHPixel) / totalF);
                         }
                     }
+                    else if(parent.tagName == "DANCE"){
+                        var computedStyle = getComputedStyle(parent, null);
+                        var areaResult = DanceUI.GetDanceArea(parent);
+                        if(areaResult.width.unit == "h"){
+                            parent.style.width = (areaResult.width.num * DanceUI.StandardUnits.Height) - (computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
+                        }
+                        else if(areaResult.width.unit == "f"){
+                            parent.style.width = (areaResult.width.num * everyFlexPixel) - (computedStyle.marginLeft + computedStyle.marginRight + computedStyle.paddingLeft + computedStyle.paddingRight + computedStyle.borderLeft + computedStyle.borderRight);
+                        }
+                        if(areaResult.height.unit == "h"){
+                            parent.style.height = (areaResult.height.num * DanceUI.StandardUnits.Height) - (computedStyle.marginTop + computedStyle.marginBottom + computedStyle.paddingTop + computedStyle.paddingBottom + computedStyle.borderTop + computedStyle.borderBottom);
+                        }
+                        else if(areaResult.height.unit == "f"){
+                            parent.style.height = (areaResult.height.num * everyFlexPixel) - (computedStyle.marginTop + computedStyle.marginBottom + computedStyle.paddingTop + computedStyle.paddingBottom + computedStyle.borderTop + computedStyle.borderBottom);
+                        }
+                        
+                        for(var i = 0; i < parent.childNodes.length; i++){
+                            DanceUI.refresh(parent.childNodes[i], null);
+                        }
+                    }
                 },
 
                 UserWindowOnload : function(){
@@ -137,14 +157,12 @@
                 WindowOnload : function(){
                     DanceUI.CalculateStandardUnits();
                     DanceUI.SetStandardUnits();
-                    DanceUI.refresh(document.getElementsByTagName("line")[0], null);
-                    // DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.refresh(document.getElementsByTagName("body")[0], null);
                     DanceUI.UserWindowOnload();
                 },
 
                 WindowOnresize : function(){
-                    DanceUI.refresh(document.getElementsByTagName("line")[0], null);
-                    // DanceUI.refresh(document.getElementsByTagName("body")[0]);
+                    DanceUI.refresh(document.getElementsByTagName("body")[0], null);
                     DanceUI.UserWindowOnresize();
                 }
             }
