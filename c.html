@@ -6,11 +6,8 @@
     </head>
     <body>
         <line>
-            <dance width="1f" height="1f">h</dance>
-            <!-- <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1h" height="1h">h</dance> -->
+            <dance width="5h" height="5h">h</dance>
+            <dance width="1f" height="5h">f</dance>
         </line>
         <script>
             var DanceUI = {
@@ -142,7 +139,7 @@
                             wannawidth = (areaResult.width.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginLeft) + DanceUI.DecodeComputedStyle(computedStyle.marginRight) + DanceUI.DecodeComputedStyle(computedStyle.paddingLeft) + DanceUI.DecodeComputedStyle(computedStyle.paddingRight) + DanceUI.DecodeComputedStyle(computedStyle.borderLeft) + DanceUI.DecodeComputedStyle(computedStyle.borderRight));
                         }
                         if(areaResult.height.unit == "h"){
-                            wannaheight = (areaResult.height.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom))/2;
+                            wannaheight = (areaResult.height.num * DanceUI.StandardUnits.Height) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
                         }
                         else if(areaResult.height.unit == "f"){
                             wannaheight = (areaResult.height.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
