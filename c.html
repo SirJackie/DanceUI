@@ -7,12 +7,16 @@
     <body>
         <line>
             <!-- <dance width="5h" height="5h">h</dance> -->
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
-            <dance width="1f" height="1h">f</dance>
+            <dance width="4h" height="4h">Logo</dance>
+            <dance width="1f" height="4h">User Infomation</dance>
         </line>
+
+        <line>
+            <dance width="1.5h" height="1.5h">A</dance>
+            <dance width="1f" height="1.5h">Line</dance>
+            <dance width="1.5h" height="1.5h">A</dance>
+        </line>
+
         <script>
             var DanceUI = {
                 StandardUnits : {
@@ -55,20 +59,20 @@
                         }
                         //单位是h
                         return ({
-                            num : Math.floor(resultStr[0].substr(0,resultStr[0].length-1)),
+                            num : parseFloat(resultStr[0].substr(0,resultStr[0].length-1)),
                             unit : "h"
                         });
                     }
                     //单位是f
                     return ({
-                        num : Math.floor(resultStr[0].substr(0,resultStr[0].length-1)),
+                        num : parseFloat(resultStr[0].substr(0,resultStr[0].length-1)),
                         unit : "f"
                     });
                 },
 
                 DecodeComputedStyle : function(str){
                     var resultStr = str.match(/[0123456789.]+px/);
-                    return Math.floor(resultStr[0].substr(0,resultStr[0].length-2));
+                    return parseFloat(resultStr[0].substr(0,resultStr[0].length-2));
                 },
 
                 GetDanceArea : function(dance){
