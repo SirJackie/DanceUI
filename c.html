@@ -6,7 +6,10 @@
     </head>
     <body>
         <line>
-            <!-- <dance width="5h" height="5h">h</dance> -->
+            <dance width="1f" height="10h">10h height!</dance>
+        </line>
+        <!-- 
+        <line>
             <dance width="4h" height="4h">Logo</dance>
             <dance width="1f" height="4h">User Infomation</dance>
         </line>
@@ -70,6 +73,7 @@
             <dance width="1f" height="1.5h">Line</dance>
             <dance width="1.5h" height="1.5h">A</dance>
         </line>
+         -->
 
         <script>
             var DanceUI = {
@@ -207,7 +211,7 @@
                             wannaheight = (areaResult.height.num * everyFlexPixel) - (DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom) + DanceUI.DecodeComputedStyle(computedStyle.paddingTop) + DanceUI.DecodeComputedStyle(computedStyle.paddingBottom) + DanceUI.DecodeComputedStyle(computedStyle.borderTop) + DanceUI.DecodeComputedStyle(computedStyle.borderBottom));
                         }
                         parent.style.width = wannawidth + "px";
-                        parent.style.height = wannaheight + "px";
+                        parent.style.height = (wannaheight - 1) + "px";
                         // console.log(areaResult.width.num * everyFlexPixel);
                         // console.log(wannawidth);
                         console.log((DanceUI.DecodeComputedStyle(computedStyle.marginTop) + DanceUI.DecodeComputedStyle(computedStyle.marginBottom)));
