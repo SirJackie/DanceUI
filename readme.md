@@ -22,7 +22,7 @@
 
 # 新的盒模型
 
-使用<line>标签创建一个行，然后就可以在里面自由地使用<dance>标签了！<dance>标签是特殊的div，它能保证宽度和高度就是你规定的值，完全不需要担心margin、border和padding！
+使用&lt;line&gt;标签创建一个行，然后就可以在里面自由地使用&lt;dance&gt;标签了！&lt;dance&gt;标签是特殊的div，它能保证宽度和高度就是你规定的值，完全不需要担心margin、border和padding！
 
 ![img1](./imagesForReadme/img1.png)
 
