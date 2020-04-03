@@ -6,10 +6,6 @@
     </head>
     <body>
         <line>
-            <dance width="1f" height="10h">10h height!</dance>
-        </line>
-        <!-- 
-        <line>
             <dance width="4h" height="4h">Logo</dance>
             <dance width="1f" height="4h">User Infomation</dance>
         </line>
@@ -73,9 +69,59 @@
             <dance width="1f" height="1.5h">Line</dance>
             <dance width="1.5h" height="1.5h">A</dance>
         </line>
-         -->
+        
 
         <script>
+            if(!window.getComputedStyle){
+                window.getPixelValue = function(element, value){
+                    var PIXEL = /^\d+(px)?$/i;
+                    if (PIXEL.test(value)){
+                        //If the value's unit is pixel,return the value.
+                        return parseInt(value);
+                    }
+                    else{
+                        //Get pixel value using IE's runtimeStyle.
+                        var style = element.style.left;
+                        var runtimeStyle = element.runtimeStyle.left;
+                        element.runtimeStyle.left = element.currentStyle.left;
+                        element.style.left = value || 0;
+                        value = element.style.pixelLeft;
+                        element.style.left = style;
+                        element.runtimeStyle.left = runtimeStyle;
+                        return value;
+                    }
+                };
+                window.getComputedStyle = function(element, pseudoElt){
+                    var width = element.currentStyle.width;
+                    var height = element.currentStyle.height;
+                    
+                    var marginTop = element.currentStyle.marginTop;
+                    var marginBottom = element.currentStyle.marginBottom;
+                    var marginLeft = element.currentStyle.marginLeft;
+                    var marginRight = element.currentStyle.marginRight;
+
+                    var paddingTop = element.currentStyle.paddingTop;
+                    var paddingBottom = element.currentStyle.paddingBottom;
+                    var paddingLeft = element.currentStyle.paddingLeft;
+                    var paddingRight = element.currentStyle.paddingRight;
+
+                    return({
+                        width : window.getPixelValue(element, width),
+                        height : window.getPixelValue(element, height),
+
+                        marginTop : window.getPixelValue(element, marginTop),
+                        marginBottom : window.getPixelValue(element, marginBottom),
+                        marginLeft : window.getPixelValue(element, marginLeft),
+                        marginRight : window.getPixelValue(element, marginRight),
+
+                        paddingTop : window.getPixelValue(element, paddingTop),
+                        paddingBottom : window.getPixelValue(element, paddingBottom),
+                        paddingLeft : window.getPixelValue(element, paddingLeft),
+                        paddingRight : window.getPixelValue(element, paddingRight)
+                    });
+                }
+            }
+
             var DanceUI = {
                 StandardUnits : {
                     Height   : null,
